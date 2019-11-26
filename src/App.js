@@ -20,24 +20,26 @@ const list = [
 ];
 
 function App() {
+  const news = list.map(l => {
+    return (
+      <div>
+        <div>
+          <li>Title: {l.title}</li>
+          <li>URL: {l.url}</li>
+          <li>Author: {l.author}</li>
+          <li>No. Comments: {l.num_comments}</li>
+          <li>Points: {l.points}</li>
+          <li>ObjectID: {l.objectID}</li>
+        </div>
+        <hr />
+      </div>
+    );
+  });
+
   return (
     <div className="App">
       <ul style={{listStyle: 'none'}}>
-        {list.map(l => {
-          return (
-            <div>
-              <div>
-                <li>Title: {l.title}</li>
-                <li>URL: {l.url}</li>
-                <li>Author: {l.author}</li>
-                <li>No. Comments: {l.num_comments}</li>
-                <li>Points: {l.points}</li>
-                <li>ObjectID: {l.objectID}</li>
-              </div>
-              <hr />
-            </div>
-          );
-        })}
+        {news}
       </ul>
     </div>
   );
