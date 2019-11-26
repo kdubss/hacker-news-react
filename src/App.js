@@ -24,8 +24,7 @@ function App() {
     return (
       <div>
         <div>
-          <li>Title: {l.title}</li>
-          <li>URL: {l.url}</li>
+          <li><a href={l.url}>Title: {l.title}</a></li>
           <li>Author: {l.author}</li>
           <li>No. Comments: {l.num_comments}</li>
           <li>Points: {l.points}</li>
