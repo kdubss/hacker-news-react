@@ -23,12 +23,11 @@ function App() {
   const news = list.map(l => {
     return (
       <div>
-        <div>
+        <div key={l.objectID}>
           <li><a href={l.url}>Title: {l.title}</a></li>
           <li>Author: {l.author}</li>
           <li>No. Comments: {l.num_comments}</li>
           <li>Points: {l.points}</li>
-          <li>ObjectID: {l.objectID}</li>
         </div>
         <hr />
       </div>
