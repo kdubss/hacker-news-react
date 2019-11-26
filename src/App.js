@@ -19,26 +19,39 @@ const list = [
   },
 ];
 
-function App() {
-  const news = list.map(l =>
-    <div>
-      <div key={l.objectID}>
-        <li><a href={l.url}>Title: {l.title}</a></li>
-        <li>Author: {l.author}</li>
-        <li>No. Comments: {l.num_comments}</li>
-        <li>Points: {l.points}</li>
-      </div>
-      <hr />
-    </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list
+    }
+  };
 
-  return (
-    <div className="App">
-      <ul style={{listStyle: 'none'}}>
-        {news}
-      </ul>
-    </div>
-  );
+  renderList() {
+    return (
+      <div>
+        {this.state.list.map(l =>
+          <div key={l.objectID}>
+            <ul style={{listStyle: "none"}}>
+              <li>Title: <a href={l.url}>{l.title}</a></li>
+              <li>Author: {l.author}</li>
+              <li>No. Comments: {l.num_comments}</li>
+              <li>Points: {l.points}</li>
+            </ul>
+            <hr />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderList()}
+      </div>
+    );
+  };
 }
 
 export default App;
