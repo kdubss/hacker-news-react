@@ -25,6 +25,7 @@ class App extends React.Component {
     this.state = {
       list
     }
+    this.onDismiss = this.onDismiss.bind(this);
   };
 
   renderList() {
@@ -37,13 +38,21 @@ class App extends React.Component {
               <li>Author: {l.author}</li>
               <li>No. Comments: {l.num_comments}</li>
               <li>Points: {l.points}</li>
+              <li>
+                <button
+                  onClick={() => this.onDismiss(l.objectID)}
+                  type="button"
+                >
+                  Dismiss
+                </button>
+              </li>
             </ul>
             <hr />
           </div>
         )}
       </div>
     );
-  }
+  };
 
   render() {
     return (
