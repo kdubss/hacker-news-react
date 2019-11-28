@@ -23,14 +23,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list
-    }
+      list,
+      searchTerm: '',
+    };
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSearchChanges = this.onSearchChanges.bind(this);
   };
 
   renderList() {
     return (
-      <div>
+      <div className="App">
+        {this.renderForm()}
         {this.state.list.map(l =>
           <div key={l.objectID}>
             <ul style={{listStyle: "none"}}>
@@ -41,17 +44,22 @@ class App extends React.Component {
               <li>
                 {this.renderDismissButton(l)}
               </li>
-              <li>
-                {this.renderSecondButton(l)}
-              </li>
-              <li>
-                {this.renderThirdButton(l)}
-              </li>
             </ul>
             <hr />
           </div>
         )}
       </div>
+    );
+  };
+
+  renderForm() {
+    return (
+      <form>
+        <input
+          type="text"
+          onChange={this.onSearchChanges}
+        />
+      </form>
     );
   };
 
@@ -63,21 +71,9 @@ class App extends React.Component {
     );
   };
 
-  renderSecondButton(item) {
-    return (
-      <button onClick={console.log(item)} type="button">
-        console.log button (executed on component load)
-      </button>
-    )
-  }
-
-  renderThirdButton(item) {
-    return (
-      <button onClick={() => console.log(item)} type="button">
-        console.log button (higher order function - mapped to event handler)
-      </button>
-    )
-  }
+  onSearchChanges(e) {
+    this.setState({ searchTerm: e.target.value });
+  };
 
   onDismiss(id) {
     const updated_list = this.state.list.filter(item => item.objectID !== id);
