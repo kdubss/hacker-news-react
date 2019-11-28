@@ -41,6 +41,12 @@ class App extends React.Component {
               <li>
                 {this.renderDismissButton(l)}
               </li>
+              <li>
+                {this.renderSecondButton(l)}
+              </li>
+              <li>
+                {this.renderThirdButton(l)}
+              </li>
             </ul>
             <hr />
           </div>
@@ -56,6 +62,22 @@ class App extends React.Component {
       </button>
     );
   };
+
+  renderSecondButton(item) {
+    return (
+      <button onClick={console.log(item)} type="button">
+        console.log button (executed on component load)
+      </button>
+    )
+  }
+
+  renderThirdButton(item) {
+    return (
+      <button onClick={() => console.log(item)} type="button">
+        console.log button (higher order function - mapped to event handler)
+      </button>
+    )
+  }
 
   onDismiss(id) {
     const updated_list = this.state.list.filter(item => item.objectID !== id);
