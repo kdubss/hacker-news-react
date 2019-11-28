@@ -19,6 +19,12 @@ const list = [
   },
 ];
 
+const isSearched = searchTerm => {
+  return item => {
+    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+  };
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +40,7 @@ class App extends React.Component {
     return (
       <div className="App">
         {this.renderForm()}
-        {this.state.list.map(l =>
+        {this.state.list.filter().map(l =>
           <div key={l.objectID}>
             <ul style={{listStyle: "none"}}>
               <li>Title: <a href={l.url}>{l.title}</a></li>
