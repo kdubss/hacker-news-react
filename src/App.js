@@ -39,18 +39,21 @@ class App extends React.Component {
               <li>No. Comments: {l.num_comments}</li>
               <li>Points: {l.points}</li>
               <li>
-                <button
-                  onClick={() => this.onDismiss(l.objectID)}
-                  type="button"
-                >
-                  Dismiss
-                </button>
+                {this.renderDismissButton(l)}
               </li>
             </ul>
             <hr />
           </div>
         )}
       </div>
+    );
+  };
+
+  renderDismissButton(item) {
+    return (
+      <button onClick={() => this.onDismiss(item.objectID)} type="button">
+        Dismiss
+      </button>
     );
   };
 
