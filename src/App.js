@@ -39,8 +39,10 @@ class App extends React.Component {
   renderList() {
     return (
       <div className="App">
-        {this.renderForm()}
-        {this.state.list.filter().map(l =>
+        <form>
+          <input type="text" onChange={this.onSearchChanges} />
+        </form>
+        {this.state.list.filter(isSearched(this.state.searchTerm)).map(l =>
           <div key={l.objectID}>
             <ul style={{listStyle: "none"}}>
               <li>Title: <a href={l.url}>{l.title}</a></li>
@@ -55,17 +57,6 @@ class App extends React.Component {
           </div>
         )}
       </div>
-    );
-  };
-
-  renderForm() {
-    return (
-      <form>
-        <input
-          type="text"
-          onChange={this.onSearchChanges}
-        />
-      </form>
     );
   };
 
