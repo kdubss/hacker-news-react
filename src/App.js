@@ -31,6 +31,7 @@ class App extends React.Component {
     this.state = {
       list,
       searchTerm: '',
+      toggle: false,
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
@@ -51,6 +52,12 @@ class App extends React.Component {
               <li>Points: {l.points}</li>
               <li>
                 {this.renderDismissButton(l)}
+              </li>
+              <li>{this.state.toggle ? 'ON' : 'OFF'}</li>
+              <li>
+                <button onClick={() => this.setState({toggle: !this.state.toggle})}>
+                  Toggle {this.state.toggle}
+                </button>
               </li>
             </ul>
             <hr />
