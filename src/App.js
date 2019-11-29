@@ -31,19 +31,20 @@ class App extends React.Component {
     this.state = {
       list,
       searchTerm: '',
-      toggle: false,
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
   };
 
   renderList() {
+    const {searchTerm, list} = this.state;
+
     return (
       <div className="App">
         <form>
           <input type="text" onChange={this.onSearchChanges} />
         </form>
-        {this.state.list.filter(isSearched(this.state.searchTerm)).map(l =>
+        {list.filter(isSearched(searchTerm)).map(l =>
           <div key={l.objectID}>
             <ul style={{listStyle: "none"}}>
               <li>Title: <a href={l.url}>{l.title}</a></li>
@@ -52,12 +53,6 @@ class App extends React.Component {
               <li>Points: {l.points}</li>
               <li>
                 {this.renderDismissButton(l)}
-              </li>
-              <li>{this.state.toggle ? 'ON' : 'OFF'}</li>
-              <li>
-                <button onClick={() => this.setState({toggle: !this.state.toggle})}>
-                  Toggle {this.state.toggle}
-                </button>
               </li>
             </ul>
             <hr />
