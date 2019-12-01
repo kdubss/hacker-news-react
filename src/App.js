@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FormExample from './components/FormExample';
+
 const list = [
   {
     title: 'React',
@@ -35,6 +37,10 @@ class App extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
   };
+
+  renderFormExample() {
+    return <FormExample />
+  }
 
   renderList() {
     const {searchTerm, list} = this.state;
@@ -86,7 +92,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.renderList()}
+        {/* {this.renderList()} */}
+        {this.renderFormExample()}
       </div>
     );
   };
