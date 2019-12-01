@@ -31,47 +31,21 @@ class App extends React.Component {
     this.state = {
       list,
       searchTerm: '',
-      userInputValue: '',
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.renderInputExample = this.renderInputExample.bind(this);
-    this.renderTextareaExample = this.renderTextareaExample.bind(this);
   };
 
-  handleChange(e) {
-    this.setState({ userInputValue: e.target.value });
-  };
-
-  handleSubmit(e) {
-    alert('User Value Input has been changed to: ', this.state.userInputValue);
-    e.preventDefault();
-  }
-
-  renderTextareaExample() {
+  renderSelectExample() {
     return (
-      <textarea>
-        Hello, there!  This is some text in a text area.
-      </textarea>
+      <select>
+        <option value="grapefruit">Grape fruit</option>
+        <option value="lime">Lime</option>
+        <option value="coconut" selected>Coconut</option>
+        <option value="mango">Mango</option>
+      </select>
     );
   };
-
-  renderInputExample() {
-    return (
-      <form>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={this.state.userInputValue}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
 
   renderList() {
     const {searchTerm, list} = this.state;
@@ -85,6 +59,7 @@ class App extends React.Component {
             value={searchTerm}
           />
         </form>
+
         {list.filter(isSearched(searchTerm)).map(l =>
           <div key={l.objectID}>
             <ul style={{listStyle: "none"}}>
@@ -124,8 +99,7 @@ class App extends React.Component {
     return (
       <div>
         {/* {this.renderList()} */}
-        {this.renderInputExample()}
-        {this.renderTextareaExample()}
+        { this.renderSelectExample() }
       </div>
     );
   };
