@@ -42,7 +42,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <form>
-          <input type="text" onChange={this.onSearchChanges} />
+          <input
+            type="text"
+            onChange={this.onSearchChanges}
+            value={searchTerm}
+          />
         </form>
         {list.filter(isSearched(searchTerm)).map(l =>
           <div key={l.objectID}>
