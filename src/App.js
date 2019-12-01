@@ -31,21 +31,48 @@ class App extends React.Component {
     this.state = {
       list,
       searchTerm: '',
+      isGoing: true,
+      numberOfGuests: 2,
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   };
 
-  renderSelectExample() {
+  renderMultiInput() {
     return (
-      <select>
-        <option value="grapefruit">Grape fruit</option>
-        <option value="lime">Lime</option>
-        <option value="coconut" selected>Coconut</option>
-        <option value="mango">Mango</option>
-      </select>
+      <form>
+        <label>
+          Is going:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={ this.state.isGoing }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <br />
+        <label>
+          Number of guests:
+          <input
+            onChange={ this.handleChange }
+            value={ this.state.numberOfGuests }
+            type="number"
+          />
+        </label>
+      </form>
     );
   };
+
+  handleChange(e) {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
 
   renderList() {
     const {searchTerm, list} = this.state;
@@ -99,7 +126,7 @@ class App extends React.Component {
     return (
       <div>
         {/* {this.renderList()} */}
-        { this.renderSelectExample() }
+        { this.renderMultiInput() }
       </div>
     );
   };
