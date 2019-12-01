@@ -1,7 +1,5 @@
 import React from 'react';
 
-import FormExample from './components/FormExample';
-
 const list = [
   {
     title: 'React',
@@ -33,13 +31,36 @@ class App extends React.Component {
     this.state = {
       list,
       searchTerm: '',
+      userInputValue: '',
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   };
 
+  handleChange(e) {
+    this.setState({ userInputValue: e.target.value });
+  };
+
+  handleSubmit(e) {
+    alert('User Value Input has been changed to: ', this.state.userInputValue);
+    e.preventDefault();
+  }
+
   renderFormExample() {
-    return <FormExample />
+    return (
+      <form>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={this.state.userInputValue}
+            onChange={this.handleChange}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
   }
 
   renderList() {
