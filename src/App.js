@@ -36,6 +36,8 @@ class App extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderInputExample = this.renderInputExample.bind(this);
+    this.renderTextareaExample = this.renderTextareaExample.bind(this);
   };
 
   handleChange(e) {
@@ -47,7 +49,15 @@ class App extends React.Component {
     e.preventDefault();
   }
 
-  renderFormExample() {
+  renderTextareaExample() {
+    return (
+      <textarea>
+        Hello, there!  This is some text in a text area.
+      </textarea>
+    );
+  };
+
+  renderInputExample() {
     return (
       <form>
         <label>
@@ -114,7 +124,8 @@ class App extends React.Component {
     return (
       <div>
         {/* {this.renderList()} */}
-        {this.renderFormExample()}
+        {this.renderInputExample()}
+        {this.renderTextareaExample()}
       </div>
     );
   };
