@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SearchBar from './components/SearchBar';
+
 const list = [
   {
     title: 'React',
@@ -36,56 +38,17 @@ class App extends React.Component {
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChanges = this.onSearchChanges.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   };
-
-  renderMultiInput() {
-    return (
-      <form>
-        <label>
-          Is going:
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={ this.state.isGoing }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <br />
-        <label>
-          Number of guests:
-          <input
-            onChange={ this.handleChange }
-            value={ this.state.numberOfGuests }
-            type="number"
-          />
-        </label>
-      </form>
-    );
-  };
-
-  handleChange(e) {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
 
   renderList() {
     const {searchTerm, list} = this.state;
 
     return (
       <div className="App">
-        <form>
-          <input
-            type="text"
-            onChange={this.onSearchChanges}
-            value={searchTerm}
-          />
-        </form>
+        <SearchBar
+          value={ searchTerm }
+          onChange={ this.onSearchChanges }
+        />
 
         {list.filter(isSearched(searchTerm)).map(l =>
           <div key={l.objectID}>
@@ -125,8 +88,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.renderList()} */}
-        { this.renderMultiInput() }
+        {this.renderList()}
       </div>
     );
   };
