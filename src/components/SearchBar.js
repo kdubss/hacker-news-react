@@ -2,12 +2,12 @@ import React from 'react';
 
 class SearchBar extends React.Component {
   render() {
-    const { value, onChange } = this.props;
+    const { value, onChange, children } = this.props;
 
     return (
       <div className="App">
         <form>
-          <input
+          { children } <input
             type="text"
             value={ value }
             onChange={ onChange }

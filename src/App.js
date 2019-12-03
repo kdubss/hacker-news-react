@@ -43,7 +43,9 @@ class App extends React.Component {
         <SearchBar
           value={ searchTerm }
           onChange={ this.onSearchChanges }
-        />
+        >
+          Search
+        </SearchBar>
         <Table
           list={ list }
           pattern={ searchTerm }
