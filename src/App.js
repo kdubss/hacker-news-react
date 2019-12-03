@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SearchBar from './components/SearchBar';
+import Table from './components/Table';
 
 const list = [
   {
@@ -20,12 +21,6 @@ const list = [
     objectID: 1,
   },
 ];
-
-const isSearched = searchTerm => {
-  return item => {
-    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-  };
-};
 
 class App extends React.Component {
   constructor(props) {
@@ -49,21 +44,11 @@ class App extends React.Component {
           value={ searchTerm }
           onChange={ this.onSearchChanges }
         />
-
-        {list.filter(isSearched(searchTerm)).map(l =>
-          <div key={l.objectID}>
-            <ul style={{listStyle: "none"}}>
-              <li>Title: <a href={l.url}>{l.title}</a></li>
-              <li>Author: {l.author}</li>
-              <li>No. Comments: {l.num_comments}</li>
-              <li>Points: {l.points}</li>
-              <li>
-                {this.renderDismissButton(l)}
-              </li>
-            </ul>
-            <hr />
-          </div>
-        )}
+        <Table
+          list={ list }
+          pattern={ searchTerm }
+          onDismiss={ this.onDismiss }
+        />
       </div>
     );
   };
@@ -92,6 +77,6 @@ class App extends React.Component {
       </div>
     );
   };
-}
+};
 
 export default App;
