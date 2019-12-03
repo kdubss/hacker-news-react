@@ -44,7 +44,9 @@ class App extends React.Component {
           value={ searchTerm }
           onChange={ this.onSearchChanges }
         >
-          Search
+          <div>
+            <span>Passing JSX as Children properties</span>
+          </div>
         </SearchBar>
         <Table
           list={ list }
