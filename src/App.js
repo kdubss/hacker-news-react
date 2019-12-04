@@ -2,6 +2,7 @@ import React from 'react';
 
 import SearchBar from './components/SearchBar';
 import Table from './components/Table';
+import WelcomeDialog from './components/WelcomeDialog';
 
 const list = [
   {
@@ -44,15 +45,15 @@ class App extends React.Component {
           value={ searchTerm }
           onChange={ this.onSearchChanges }
         >
-          <div>
-            <span>Passing JSX as Children properties</span>
-          </div>
+          Search
         </SearchBar>
         <Table
           list={ list }
           pattern={ searchTerm }
           onDismiss={ this.onDismiss }
         />
+        <hr />
+        <WelcomeDialog />
       </div>
     );
   };
