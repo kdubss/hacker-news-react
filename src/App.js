@@ -2,8 +2,6 @@ import React from 'react';
 
 import SearchBar from './components/SearchBar';
 import Table from './components/Table';
-import WelcomeDialog from './components/WelcomeDialog';
-import SignUpDialog from './components/SignUpDialog';
 
 const list = [
   {
@@ -53,10 +51,6 @@ class App extends React.Component {
           pattern={ searchTerm }
           onDismiss={ this.onDismiss }
         />
-        <hr />
-        <WelcomeDialog />
-        <hr />
-        <SignUpDialog />
       </div>
     );
   };
