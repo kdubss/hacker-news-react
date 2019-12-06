@@ -3,6 +3,8 @@ import React from 'react';
 import SearchBar from './components/SearchBar';
 import Table from './components/Table';
 
+import './App.css'
+
 const list = [
   {
     title: 'React',
@@ -39,18 +41,20 @@ class App extends React.Component {
     const {searchTerm, list} = this.state;
 
     return (
-      <div className="App">
-        <SearchBar
-          value={ searchTerm }
-          onChange={ this.onSearchChanges }
-        >
-          Search
-        </SearchBar>
-        <Table
-          list={ list }
-          pattern={ searchTerm }
-          onDismiss={ this.onDismiss }
-        />
+      <div className="page">
+        <div className="interactions">
+          <SearchBar
+            value={ searchTerm }
+            onChange={ this.onSearchChanges }
+          >
+            Search
+          </SearchBar>
+        </div>
+          <Table
+            list={ list }
+            pattern={ searchTerm }
+            onDismiss={ this.onDismiss }
+          />
       </div>
     );
   };
