@@ -8,9 +8,10 @@ import {
 
 import SearchBar from './components/SearchBar';
 import Table from './components/Table';
+import About from './components/About';
+import Users from './components/Users';
 
 import './App.css'
-import { blockStatement } from '@babel/types';
 
 const list = [
   {
@@ -59,6 +60,14 @@ class App extends React.Component {
               </ul>
             </nav>
           </div>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+          </Switch>
         </Router>
         <div className="interactions">
           <SearchBar
