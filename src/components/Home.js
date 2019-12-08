@@ -8,6 +8,7 @@ import '../App.css';
 
 class Home extends React.Component {
   constructor(props) {
+    console.log('calling constructor');
     super(props);
     this.state = {
       list,
@@ -17,6 +18,14 @@ class Home extends React.Component {
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
   };
+
+  UNSAFE_componentWillMount() {
+    console.log('component will mount');
+  }
+
+  componentDidMount() {
+    console.log('component mounted!');
+  }
 
   render() {
     return (
