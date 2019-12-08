@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
 
+import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import Table from './components/Table';
-import About from './components/About';
-import Users from './components/Users';
 
 import './App.css'
 
@@ -50,25 +43,7 @@ class App extends React.Component {
 
     return (
       <div className="page">
-        <Router>
-          <div>
-            <nav>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/users">Users</Link></li>
-              </ul>
-            </nav>
-          </div>
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-          </Switch>
-        </Router>
+        <Navbar />
         <div className="interactions">
           <SearchBar
             value={ searchTerm }
