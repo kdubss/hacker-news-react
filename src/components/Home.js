@@ -5,7 +5,6 @@ import SearchBar from './SearchBar';
 import Table from './Table';
 
 import '../App.css';
-import Navbar from './Navbar';
 
 class Home extends React.Component {
   constructor(props) {
@@ -32,7 +31,6 @@ class Home extends React.Component {
 
     return (
       <div className="page">
-        <Navbar />
         <div className="interactions">
           <SearchBar
             value={ searchTerm }
