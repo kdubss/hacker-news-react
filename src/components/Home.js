@@ -38,8 +38,6 @@ class Home extends React.Component {
   renderList() {
     const { searchTerm, result } = this.state;
 
-    if (!result) { return null; }
-
     return (
       <div className="page">
         <div className="interactions">
@@ -50,11 +48,15 @@ class Home extends React.Component {
             Search
           </SearchBar>
         </div>
-        <Table
-          list={ result.hits }
-          pattern={ searchTerm }
-          onDismiss={ this.onDismiss }
-        />
+        {
+          result
+          ? <Table
+              list={ result.hits }
+              pattern={ searchTerm }
+              onDismiss={ this.onDismiss }
+            />
+          : null
+        }
       </div>
     );
   };
