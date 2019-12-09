@@ -36,7 +36,9 @@ class Home extends React.Component {
   };
 
   renderList() {
-    const { searchTerm, list } = this.state;
+    const { searchTerm, result } = this.state;
+
+    if (!result) { return null; }
 
     return (
       <div className="page">
@@ -49,7 +51,7 @@ class Home extends React.Component {
           </SearchBar>
         </div>
         <Table
-          list={ list }
+          list={ result.hits }
           pattern={ searchTerm }
           onDismiss={ this.onDismiss }
         />
@@ -59,15 +61,18 @@ class Home extends React.Component {
 
   renderDismissButton(item) {
     return (
-      <button onClick={ () => this.onDismiss(item.objectId) } type="button">
+      <button onClick={ () => this.onDismiss(item.objectID) } type="button">
         Dismiss
       </button>
     );
   };
 
   onDismiss(id) {
-    const updated_list = this.state.list.filter(item => item.objectId !== id);
-    this.setState({ list: updated_list });
+    const isNotId = item => item.objectID !== id;
+    const updatedHits = this.state.result.hits.filter(isNotId);
+    this.setState({
+      result: Object.assign({}, this.state.result, { hits: updatedHits })
+    });
   };
 
   onSearchChange(e) {
@@ -86,6 +91,7 @@ class Home extends React.Component {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
+      .catch(err => err);
   }
 };
 
