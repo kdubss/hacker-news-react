@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import list from '../data/example-list';
 import SearchBar from './SearchBar';
 import Table from './Table';
+import IncomingData from './IncomingData';
 
 import '../App.css';
 
@@ -49,12 +50,13 @@ class Home extends React.Component {
           </SearchBar>
         </div>
         {
-          result &&
-          <Table
-            list={ result.hits }
-            pattern={ searchTerm }
-            onDismiss={ this.onDismiss }
-          />
+          result
+            ?  <Table
+                list={ result.hits }
+                pattern={ searchTerm }
+                onDismiss={ this.onDismiss }
+              />
+            : <IncomingData />
         }
       </div>
     );
