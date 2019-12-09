@@ -56,7 +56,6 @@ class Home extends React.Component {
           result
             ?  <Table
                 list={ result.hits }
-                pattern={ searchTerm }
                 onDismiss={ this.onDismiss }
               />
             : <IncomingData />
@@ -85,10 +84,10 @@ class Home extends React.Component {
     this.setState({ searchTerm: e.target.value });
   };
 
-  onSearchSubmit() {
+  onSearchSubmit(e) {
     const { searchTerm } = this.state;
-
     this.fetchSearchTopStories(searchTerm);
+    e.preventDefault();
   };
 
   setSearchTopStories(result) {

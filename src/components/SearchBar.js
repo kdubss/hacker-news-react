@@ -2,14 +2,12 @@ import React from 'react';
 
 const SearchBar = ({ value, onChange, onSubmit, children }) =>
   <form onSubmit={ onSubmit }>
-    { children } <input
+    <input
       type="text"
       value={ value }
       onChange={ onChange }
     />
-    <button
-      type="submit"
-    >
+    <button type="submit">
       { children }
     </button>
   </form>
