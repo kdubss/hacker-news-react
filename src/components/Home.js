@@ -49,13 +49,12 @@ class Home extends React.Component {
           </SearchBar>
         </div>
         {
-          result
-          ? <Table
-              list={ result.hits }
-              pattern={ searchTerm }
-              onDismiss={ this.onDismiss }
-            />
-          : null
+          result &&
+          <Table
+            list={ result.hits }
+            pattern={ searchTerm }
+            onDismiss={ this.onDismiss }
+          />
         }
       </div>
     );
