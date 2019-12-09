@@ -20,12 +20,14 @@ class Home extends React.Component {
     this.state = {
       list,
       searchTerm: DEFAULT_QUERY,
+      newSearchTerm: '',
       result: null,
     };
 
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
+    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
   };
 
   render() {
@@ -45,6 +47,7 @@ class Home extends React.Component {
           <SearchBar
             value={ searchTerm }
             onChange={ this.onSearchChange }
+            onSubmit={ this.onSearchSubmit }
           >
             Search
           </SearchBar>
@@ -82,19 +85,29 @@ class Home extends React.Component {
     this.setState({ searchTerm: e.target.value });
   };
 
+  onSearchSubmit() {
+    const { searchTerm } = this.state;
+
+    this.fetchSearchTopStories(searchTerm);
+  };
+
   setSearchTopStories(result) {
     this.setState({ result });
   };
+
+  fetchSearchTopStories(searchTerm) {
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(err => err);
+  }
 
   // Once component JSX is rendered on the client and visible to the user,
   // 'componentDidMount' is called.
   componentDidMount() {
     const { searchTerm } = this.state;
 
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
-      .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
-      .catch(err => err);
+    this.fetchSearchTopStories(searchTerm);
   }
 };
 
