@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import Table from './Table';
 import IncomingData from './IncomingData';
+import Button from './Button';
 
 import '../App.css';
 
@@ -11,7 +12,8 @@ const DEFAULT_QUERY = 'redux';
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+const PARAM_PAGE = 'page=';
+const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 
 class Home extends React.Component {
   constructor(props) {
@@ -38,6 +40,8 @@ class Home extends React.Component {
 
   renderList() {
     const { searchTerm, result } = this.state;
+    const page = (result && result.page) || 0;
+    console.log('Page: ', page);
 
     return (
       <div className="page">
@@ -58,6 +62,11 @@ class Home extends React.Component {
               />
             : <IncomingData />
         }
+        <div className="interactions">
+          <Button onClick={ this.fetchSearchTopStories(searchTerm, page + 1) }>
+            More
+          </Button>
+        </div>
       </div>
     );
   };
@@ -92,8 +101,8 @@ class Home extends React.Component {
     this.setState({ result });
   };
 
-  fetchSearchTopStories(searchTerm) {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+  fetchSearchTopStories(searchTerm, page = 0) {
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`)
       .then(response => response.json())
       .then(result => {
         this.setSearchTopStories(result);
@@ -105,10 +114,7 @@ class Home extends React.Component {
   // 'componentDidMount' is called.
   componentDidMount() {
     const { searchTerm } = this.state;
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
-      .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
-      .catch(error => error);
+    this.fetchSearchTopStories(searchTerm);
   }
 };
 
