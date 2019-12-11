@@ -63,7 +63,7 @@ class Home extends React.Component {
             : <IncomingData />
         }
         <div className="interactions">
-          <Button onClick={ this.fetchSearchTopStories(searchTerm, page + 1) }>
+          <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
             More
           </Button>
         </div>
@@ -98,6 +98,8 @@ class Home extends React.Component {
   };
 
   setSearchTopStories(result) {
+    const { hits, page } = result;
+    const oldHits = page !== 0 ? this.state.result.hits : [];
     this.setState({ result });
   };
 
