@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import list from '../data/example-list';
 import SearchBar from './SearchBar';
 import Table from './Table';
 import IncomingData from './IncomingData';
 
 import '../App.css';
 
-const DEFAULT_QUERY = 'react';
+const DEFAULT_QUERY = 'redux';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
@@ -18,15 +17,14 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list,
-      searchTerm: DEFAULT_QUERY,
-      newSearchTerm: '',
       result: null,
+      searchTerm: DEFAULT_QUERY,
     };
 
-    this.onDismiss = this.onDismiss.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
   };
 
@@ -80,14 +78,14 @@ class Home extends React.Component {
     });
   };
 
-  onSearchChange(e) {
-    this.setState({ searchTerm: e.target.value });
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
   };
 
-  onSearchSubmit(e) {
+  onSearchSubmit(event) {
     const { searchTerm } = this.state;
     this.fetchSearchTopStories(searchTerm);
-    e.preventDefault();
+    event.preventDefault();
   };
 
   setSearchTopStories(result) {
@@ -97,7 +95,9 @@ class Home extends React.Component {
   fetchSearchTopStories(searchTerm) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
       .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
+      .then(result => {
+        this.setSearchTopStories(result);
+      })
       .catch(err => err);
   }
 
@@ -105,8 +105,10 @@ class Home extends React.Component {
   // 'componentDidMount' is called.
   componentDidMount() {
     const { searchTerm } = this.state;
-
-    this.fetchSearchTopStories(searchTerm);
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(error => error);
   }
 };
 

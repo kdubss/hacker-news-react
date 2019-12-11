@@ -1,6 +1,11 @@
 import React from 'react';
 
-const SearchBar = ({ value, onChange, onSubmit, children }) =>
+const SearchBar = ({
+  value,
+  onChange,
+  onSubmit,
+  children,
+}) =>
   <form onSubmit={ onSubmit }>
     <input
       type="text"

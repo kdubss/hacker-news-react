@@ -2,12 +2,6 @@ import React from 'react';
 
 import Button from './Button';
 
-const isSearched = searchTerm => {
-  return item => {
-    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-  };
-};
-
 const Table = ({ list, onDismiss }) =>
   <div className="table">
     { list.map(item =>
