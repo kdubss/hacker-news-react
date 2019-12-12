@@ -8,11 +8,13 @@ import Button from './Button';
 import '../App.css';
 
 const DEFAULT_QUERY = 'redux';
+const DEFAULT_HPP = '10';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
+const PARAM_HPP = 'hitsPerPage=';
 const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 
 class Home extends React.Component {
@@ -117,10 +119,10 @@ class Home extends React.Component {
   };
 
   fetchSearchTopStories(searchTerm, page = 0) {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`)
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&\
+${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => {
-        console.log(result.hits.length);
         this.setSearchTopStories(result);
         this.setState({ numResults: result.hits.length });
       })
