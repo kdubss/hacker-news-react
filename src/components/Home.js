@@ -21,6 +21,7 @@ class Home extends React.Component {
     this.state = {
       result: null,
       searchTerm: DEFAULT_QUERY,
+      numResults: null,
     };
 
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
@@ -71,7 +72,7 @@ class Home extends React.Component {
   renderMoreTopStoriesButton(searchTerm, page) {
     return (
       <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
-        More
+        Show Next { this.state.numResults }
       </Button>
     )
   }
@@ -102,17 +103,26 @@ class Home extends React.Component {
     event.preventDefault();
   };
 
+  /**
+   * @param {result} result Response object from request to the Hacker News API
+   */
   setSearchTopStories(result) {
     const { hits, page } = result;
     const oldHits = page !== 0 ? this.state.result.hits : [];
-    this.setState({ result });
+    const updatedHits = [...oldHits, ...hits];
+
+    this.setState({
+      result: { hits: updatedHits, page }
+    });
   };
 
   fetchSearchTopStories(searchTerm, page = 0) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`)
       .then(response => response.json())
       .then(result => {
+        console.log(result.hits.length);
         this.setSearchTopStories(result);
+        this.setState({ numResults: result.hits.length });
       })
       .catch(err => err);
   }
