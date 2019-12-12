@@ -21,7 +21,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: null,
+      results: null,
+      searchKey: '',
       searchTerm: DEFAULT_QUERY,
       numResults: null,
     };
@@ -101,7 +102,11 @@ class Home extends React.Component {
 
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
+
+    this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+
+    console.log(this.state);
     event.preventDefault();
   };
 
