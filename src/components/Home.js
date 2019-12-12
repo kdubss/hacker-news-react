@@ -41,7 +41,6 @@ class Home extends React.Component {
   renderList() {
     const { searchTerm, result } = this.state;
     const page = (result && result.page) || 0;
-    console.log('Page: ', page);
 
     return (
       <div className="page">
@@ -63,13 +62,19 @@ class Home extends React.Component {
             : <IncomingData />
         }
         <div className="interactions">
-          <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
-            More
-          </Button>
+          { this.renderMoreTopStoriesButton(searchTerm, page) }
         </div>
       </div>
     );
   };
+
+  renderMoreTopStoriesButton(searchTerm, page) {
+    return (
+      <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
+        More
+      </Button>
+    )
+  }
 
   renderDismissButton(item) {
     return (
