@@ -43,8 +43,17 @@ class Home extends React.Component {
   };
 
   renderList() {
-    const { searchTerm, result } = this.state;
-    const page = (result && result.page) || 0;
+    const { searchTerm, results, searchKey } = this.state;
+    const page = (
+      results &&
+      results[searchKey] &&
+      results[searchKey].page
+    ) || 0;
+    const list = (
+      results &&
+      results[searchKey] &&
+      results[searchKey].hits
+    ) || [];
 
     return (
       <div className="page">
@@ -58,9 +67,9 @@ class Home extends React.Component {
           </SearchBar>
         </div>
         {
-          result
+          results
             ?  <Table
-                list={ result.hits }
+                list={ list }
                 onDismiss={ this.onDismiss }
               />
             : <IncomingData />
@@ -121,8 +130,10 @@ class Home extends React.Component {
     const updatedHits = [...oldHits, ...hits];
 
     this.setState({
-      result: { hits: updatedHits, page },
-      [searchKey]: { hits: updatedHits, page },
+      results: {
+        ...results,
+        [searchKey]: { hits: updatedHits, page },
+      }
     });
 
     console.log(this.state);
