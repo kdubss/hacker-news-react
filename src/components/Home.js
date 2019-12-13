@@ -138,7 +138,11 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
   // 'componentDidMount' is called.
   componentDidMount() {
     const { searchTerm } = this.state;
+
+    this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+
+    console.log(this.state);
   }
 };
 
