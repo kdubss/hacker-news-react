@@ -115,12 +115,17 @@ class Home extends React.Component {
    */
   setSearchTopStories(result) {
     const { hits, page } = result;
+    const { searchKey, results } = this.state;
+
     const oldHits = page !== 0 ? this.state.result.hits : [];
     const updatedHits = [...oldHits, ...hits];
 
     this.setState({
-      result: { hits: updatedHits, page }
+      result: { hits: updatedHits, page },
+      [searchKey]: { hits: updatedHits, page },
     });
+
+    console.log(this.state);
   };
 
   fetchSearchTopStories(searchTerm, page = 0) {
@@ -141,8 +146,6 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
 
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
-
-    console.log(this.state);
   }
 };
 
