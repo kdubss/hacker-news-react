@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import SearchBar from './SearchBar';
 import Table from './Table';
-import IncomingData from './IncomingData';
 import Button from './Button';
 
 import '../App.css';
@@ -69,25 +68,26 @@ class Home extends React.Component {
         <Table
           list={ list }
           onDismiss={ this.onDismiss }
+          searchKey={ this.state.searchKey }
         />
         <div className="interactions">
-          { this.renderMoreTopStoriesButton(searchTerm, page) }
+          { this.renderMoreTopStoriesButton(searchKey, page) }
         </div>
       </div>
     );
   };
 
-  renderMoreTopStoriesButton(searchTerm, page) {
+  renderMoreTopStoriesButton(searchKey, page) {
     return (
-      <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
+      <Button onClick={ () => this.fetchSearchTopStories(searchKey, page + 1) }>
         Show Next { this.state.numResults }
       </Button>
     )
   }
 
-  renderDismissButton(item) {
+  renderDismissButton(item, searchKey) {
     return (
-      <button onClick={ () => this.onDismiss(item.objectID) } type="button">
+      <button onClick={ () => this.onDismiss(item.objectID, searchKey) } type="button">
         Dismiss
       </button>
     );
@@ -95,9 +95,15 @@ class Home extends React.Component {
 
   onDismiss(id) {
     const isNotId = item => item.objectID !== id;
-    const updatedHits = this.state.result.hits.filter(isNotId);
+    const { searchKey, results } = this.state;
+    const { hits, page } = results[searchKey]
+    const updatedHits = hits.filter(hit => isNotId(hit));
+
     this.setState({
-      result: { ...this.state.result, hits: updatedHits }
+      results: {
+        ...results,
+        [searchKey]: { hits: updatedHits, page },
+      }
     });
   };
 
