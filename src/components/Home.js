@@ -66,14 +66,10 @@ class Home extends React.Component {
             Search
           </SearchBar>
         </div>
-        {
-          results
-            ?  <Table
-                list={ list }
-                onDismiss={ this.onDismiss }
-              />
-            : <IncomingData />
-        }
+        <Table
+          list={ list }
+          onDismiss={ this.onDismiss }
+        />
         <div className="interactions">
           { this.renderMoreTopStoriesButton(searchTerm, page) }
         </div>
