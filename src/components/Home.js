@@ -26,6 +26,7 @@ class Home extends React.Component {
       numResults: null,
     };
 
+    this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
@@ -80,7 +81,7 @@ class Home extends React.Component {
   renderMoreTopStoriesButton(searchTerm, page) {
     return (
       <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
-        Show Next { this.state.numResults }
+        Show Next { DEFAULT_HPP }
       </Button>
     )
   }
@@ -115,7 +116,10 @@ class Home extends React.Component {
     const { searchTerm } = this.state;
 
     this.setState({ searchKey: searchTerm });
-    this.fetchSearchTopStories(searchTerm);
+
+    if (this.needsToSearchTopStories(searchTerm)) {
+      this.fetchSearchTopStories(searchTerm);
+    }
 
     event.preventDefault();
   };
