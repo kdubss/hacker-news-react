@@ -7,14 +7,14 @@ import Button from './Button';
 import '../App.css';
 
 const DEFAULT_QUERY = 'redux';
-const DEFAULT_HPP = '10';
+const DEFAULT_HPP = '50';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
+// const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 
 class Home extends React.Component {
   constructor(props) {
@@ -77,9 +77,9 @@ class Home extends React.Component {
     );
   };
 
-  renderMoreTopStoriesButton(searchKey, page) {
+  renderMoreTopStoriesButton(searchTerm, page) {
     return (
-      <Button onClick={ () => this.fetchSearchTopStories(searchKey, page + 1) }>
+      <Button onClick={ () => this.fetchSearchTopStories(searchTerm, page + 1) }>
         Show Next { this.state.numResults }
       </Button>
     )
@@ -117,9 +117,12 @@ class Home extends React.Component {
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
 
-    console.log(this.state);
     event.preventDefault();
   };
+
+  needsToSearchTopStories(searchTerm) {
+    return !this.state.results[searchTerm];
+  }
 
   /**
    * @param {result} result Response object from request to the Hacker News API
@@ -128,17 +131,21 @@ class Home extends React.Component {
     const { hits, page } = result;
     const { searchKey, results } = this.state;
 
-    const oldHits = page !== 0 ? this.state.result.hits : [];
-    const updatedHits = [...oldHits, ...hits];
+    const oldHits = results && results[searchKey]
+      ? results[searchKey].hits
+      : [];
+    const updatedHits = [
+      ...oldHits,
+      ...hits
+    ];
 
     this.setState({
       results: {
         ...results,
         [searchKey]: { hits: updatedHits, page },
-      }
+      },
     });
-
-    console.log(this.state);
+    this.setState({ numResults: this.state.results[searchKey].hits.length });
   };
 
   fetchSearchTopStories(searchTerm, page = 0) {
@@ -147,7 +154,6 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => {
         this.setSearchTopStories(result);
-        this.setState({ numResults: result.hits.length });
       })
       .catch(err => err);
   }
