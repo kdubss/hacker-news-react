@@ -24,6 +24,7 @@ class Home extends React.Component {
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
       numResults: null,
+      error: null,
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -37,13 +38,13 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        { this.renderList() }
+        { this.renderSearch() }
       </div>
     );
   };
 
-  renderList() {
-    const { searchTerm, results, searchKey } = this.state;
+  renderSearch() {
+    const { searchTerm, results, searchKey, error } = this.state;
     const page = (
       results &&
       results[searchKey] &&
@@ -54,6 +55,10 @@ class Home extends React.Component {
       results[searchKey] &&
       results[searchKey].hits
     ) || [];
+
+    if (error) {
+      return <p>Something went wrong...</p>
+    }
 
     return (
       <div className="page">
@@ -159,7 +164,10 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => {
         this.setSearchTopStories(result);
       })
-      .catch(err => err);
+      .catch(err => {
+        console.log('Error: ', err);
+        this.setState({ error: err });
+      });
   }
 
   // Once component JSX is rendered on the client and visible to the user,
