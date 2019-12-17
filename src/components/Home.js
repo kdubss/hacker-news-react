@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import SearchBar from './SearchBar';
 import Table from './Table';
 import Button from './Button';
@@ -163,15 +165,10 @@ class Home extends React.Component {
   };
 
   fetchSearchTopStories(searchTerm, page = 0) {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&\
-${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(response => response.json())
-      .then(result => {
-        this.setSearchTopStories(result);
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
+    axios(PATH_BASE + PATH_SEARCH + '?' + PARAM_SEARCH + `${searchTerm}` + '&' + PARAM_PAGE + `${page}` + '&\
+' + PARAM_HPP + DEFAULT_HPP)
+      .then(result => this.setSearchTopStories(result.data))
+      .catch(error => this.setState({ error }));
   }
 
   // Once component JSX is rendered on the client and visible to the user,
