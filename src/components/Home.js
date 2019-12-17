@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import Table from './Table';
 import Button from './Button';
+import Error from './Error';
 
 import '../App.css';
 
@@ -73,9 +74,7 @@ class Home extends React.Component {
         </div>
         {
           error
-            ? <div className="interactions">
-              <p>Something went wrong...</p>
-            </div>
+            ? <Error err={ this.error } />
             : <Table
               list={ list }
               onDismiss={ this.onDismiss }
@@ -171,7 +170,6 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
         this.setSearchTopStories(result);
       })
       .catch(err => {
-        console.log('Error: ', err);
         this.setState({ error: err });
       });
   }
@@ -183,6 +181,11 @@ ${PARAM_HPP}${DEFAULT_HPP}`)
 
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+  }
+
+  componentDidCatch(error, info) {
+    console.log('Error: ', error);
+    console.log('Info: ', info);
   }
 };
 
