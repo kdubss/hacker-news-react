@@ -7,7 +7,7 @@ import Table from '../Table';
 import Button from '../Button';
 import Error from '../Error';
 
-import '../App.css';
+import '../../App.css';
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '50';
