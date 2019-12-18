@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import SearchBar from './SearchBar';
-import Table from './Table';
-import Button from './Button';
-import Error from './Error';
+import SearchBar from '../SearchBar';
+import Table from '../Table';
+import Button from '../Button';
+import Error from '../Error';
 
 import '../App.css';
 
