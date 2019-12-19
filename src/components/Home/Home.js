@@ -7,6 +7,8 @@ import Table from '../Table';
 import Button from '../Button';
 import Error from '../Error';
 
+import Calculator from '../Calculator';
+
 import '../../App.css';
 
 const DEFAULT_QUERY = 'redux';
@@ -41,7 +43,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        { this.renderSearch() }
+        { this.renderLiftingStateExample() }
       </div>
     );
   };
@@ -83,6 +85,12 @@ class Home extends React.Component {
           { this.renderMoreTopStoriesButton(searchKey, page) }
         </div>
       </div>
+    );
+  };
+
+  renderLiftingStateExample() {
+    return (
+      <Calculator />
     );
   };
 
