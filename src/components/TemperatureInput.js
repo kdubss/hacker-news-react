@@ -5,6 +5,22 @@ const scaleNames = {
   f: 'Fahrenheit',
 };
 
+const fahrenheitToCelsius = fahrenheit => (fahrenheit - 32) * (5/9);
+const celsiusToFahrenheit = celsius => (celsius * (9/5)) + 32;
+
+const tryConvert = (temperature, converterFunc) => {
+  const inputTemperature = parseFloat(temperature);
+
+  if (Number.isNaN(inputTemperature)) {
+    return '';
+  };
+
+  const output = converterFunc(inputTemperature);
+  const roundedOutput = Math.round(output * 1000) / 1000;
+
+  return roundedOutput.toString();
+}
+
 class TemperatureInput extends React.Component {
   constructor(props) {
     super(props);
