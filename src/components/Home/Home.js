@@ -7,9 +7,8 @@ import Table from '../Table';
 import Button from '../Button';
 import Error from '../Error';
 
-import Calculator from '../Calculator';
-
 import '../../App.css';
+import WelcomeDialog from '../WelcomeDialog';
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '50';
@@ -43,7 +42,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        { this.renderLiftingStateExample() }
+        { this.renderCompositionInheritanceExample() }
       </div>
     );
   };
@@ -88,9 +87,9 @@ class Home extends React.Component {
     );
   };
 
-  renderLiftingStateExample() {
+  renderCompositionInheritanceExample() {
     return (
-      <Calculator />
+      <WelcomeDialog />
     );
   };
 
