@@ -9,6 +9,7 @@ import Error from '../Error';
 
 import '../../App.css';
 import WelcomeDialog from '../WelcomeDialog';
+import SignUpDialog from '../SignUpDialog';
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '50';
@@ -89,7 +90,7 @@ class Home extends React.Component {
 
   renderCompositionInheritanceExample() {
     return (
-      <WelcomeDialog />
+      <SignUpDialog />
     );
   };
 

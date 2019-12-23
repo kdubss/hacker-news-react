@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import FancyBorder from './FancyBorder';
 
 const Dialog = props => {
@@ -10,6 +10,7 @@ const Dialog = props => {
       <p className="Dialog-message">
         { props.message }
       </p>
+      { props.children }
     </FancyBorder>
   );
 };
