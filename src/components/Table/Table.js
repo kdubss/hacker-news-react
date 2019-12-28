@@ -1,7 +1,9 @@
 import React from 'react';
 
-import Button from './Button';
+import Button from '../Button/Button';
 import PropTypes from 'prop-types';
+
+import list from '../../data/example-list'
 
 const Table = ({ list, onDismiss }) =>
   <div className="table">
