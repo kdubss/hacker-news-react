@@ -1,10 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchBar from './SearchBar';
+import renderer from 'react-test-renderer';
 
-it('SearchBar component renders without crashing', () => {
-  const div = document.createElement('div');
+describe('SearchBar component has a valid snapshot.', () => {
 
-  ReactDOM.render(<SearchBar />, div);
-  ReactDOM.unmountComponentAtNode(div);
+    it('SearchBar component renders without crashing', () => {
+        const div = document.createElement('div');
+
+        ReactDOM.render(<SearchBar />, div);
+        ReactDOM.unmountComponentAtNode(div);
+    });
+
+
+    test('SearchBar has a valid snapshot', () => {
+        const component = renderer.create(
+            <SearchBar></SearchBar>
+        );
+        const tree = component.toJSON();
+
+        expect(tree).toMatchSnapshot();
+    });
 });
