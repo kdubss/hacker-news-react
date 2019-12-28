@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component snapshot test Home component has a valid snapshot. 1`] = `
+<div>
+  <div
+    className="FancyBorder FancyBorder-blue"
+  >
+    <h1
+      className="Dialog-title"
+    >
+      Mars Exploration Program
+    </h1>
+    <p
+      className="Dialog-message"
+    >
+      How should we refer to you?
+    </p>
+    <input
+      onChange={[Function]}
+      value=""
+    />
+    <button
+      onClick={[Function]}
+    >
+      Sign me up!
+    </button>
+  </div>
+</div>
+`;
