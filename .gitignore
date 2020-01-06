@@ -12,6 +12,9 @@
 # production
 /build
 
+# SWP files (linux)
+*.swp
+
 # misc
 .DS_Store
 .env.local
