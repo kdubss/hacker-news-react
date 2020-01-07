@@ -26,3 +26,18 @@ describe('Home component snapshot test', () => {
   });
 });
 
+describe('Table', () => {
+  const props = {
+    list: [
+      { title: '1', author: '1', num_commnets: 1, points: 2, objectID: 'y' },
+      { title: '2', author: '2', num_comments: 1, points: 2, objectID: 'z' },
+    ],
+  };
+
+  it('shows at least 2 items in the table list', () => {
+    const element = shallow(
+      <Table { ...props } />
+    );
+    expect(element.find('.table-row').length).toBe(2);
+  });
+})

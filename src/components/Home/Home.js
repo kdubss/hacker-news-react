@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import SearchBar from '../SearchBar/SearchBar';
 import Table from '../Table/Table';
@@ -10,6 +11,8 @@ import Error from '../Error/Error';
 import '../../App.css';
 import WelcomeDialog from '../WelcomeDialog';
 import SignUpDialog from '../SignUpDialog';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '50';
@@ -43,7 +46,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        { this.renderCompositionInheritanceExample() }
+        { this.renderSearch() }
       </div>
     );
   };
