@@ -35,3 +35,5 @@ COPY --from=builder /app/build .
 
 # Expose port 80
 EXPOSE 80
+
+CMD ["serve", "-p", "80", "-s", "."]
