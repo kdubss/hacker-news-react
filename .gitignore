@@ -4,16 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
-.history/*
 
 # testing
 /coverage
 
 # production
 /build
-
-# SWP files (linux)
-*.swp
 
 # misc
 .DS_Store
