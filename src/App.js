@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 
 class App extends React.Component {
@@ -13,7 +12,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <span>{ welcomeMessage }</span>
-        <p>{ welcomeBlurb }</p>
+        { welcomeBlurb }
       </div>
     );
   };
