@@ -1,12 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 
-const App = () => {
-  return (
-    <div className="App">
-      Start Hacker News App here!
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        Start with the App component, here!
+      </div>
+    );
+  };
 };
 
 export default App;
