@@ -24,7 +24,7 @@ class App extends React.Component {
   render() {
     const listItems = list.map(item => {
       return (
-        <div>
+        <div key={ item.objectID }>
           <span>
             <a href={ item.url }>{ item.url }</a>
           </span>
