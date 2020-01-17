@@ -47,13 +47,14 @@ class App extends React.Component {
   };
 
   render() {
+    const { searchTerm, list } = this.state;
     const renderSearchbar = (
       <form>
         <input type="text" onChange={ this.onSearchChange } />
       </form>
     );
 
-    const renderItems = this.state.list.filter(isSearched(this.state.searchTerm)).map(item =>
+    const renderItems = list.filter(isSearched(searchTerm)).map(item =>
       <div key={ item.objectID }>
         <span>
           <a href={ item.url }>{ item.url }</a>
