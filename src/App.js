@@ -20,14 +20,22 @@ const list = [
   },
 ];
 
+const isSearched = searchTerm => item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       list,
+      searchTerm: '',
     };
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   };
+
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
 
   /**
    * Dismiss an item based on the items 'objectID' property. 
@@ -39,7 +47,13 @@ class App extends React.Component {
   };
 
   render() {
-    const renderItems = this.state.list.map(item => 
+    const renderSearchbar = (
+      <form>
+        <input type="text" onChange={ this.onSearchChange } />
+      </form>
+    );
+
+    const renderItems = this.state.list.filter(isSearched(this.state.searchTerm)).map(item =>
       <div key={ item.objectID }>
         <span>
           <a href={ item.url }>{ item.url }</a>
@@ -60,7 +74,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <span>Here's a list of items!</span>
+        <span>Here's a Searchibar and a list of items!</span>
+        { renderSearchbar }
         { renderItems }
       </div>
     );
