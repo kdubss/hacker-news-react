@@ -24,8 +24,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list
+      list,
     };
+    this.onDismiss = this.onDismiss.bind(this);
+  };
+
+  /**
+   * Dismiss an item based on the items 'objectID' property. 
+   * @param {number} id 
+   */
+  onDismiss(id) {
+    const newList = this.state.list.filter(item => item.objectID !== id);
+    this.setState({ list: newList });
   };
 
   render() {
@@ -37,9 +47,17 @@ class App extends React.Component {
         <span>{ item.author }</span>
         <span>{ item.num_comments }</span>
         <span>{ item.points }</span>
+        <span>
+          <button
+            onClick={ () => this.onDismiss(item.objectID) }
+            type="button"
+          >
+            Dismiss
+          </button>
+        </span>
       </div>
     );
-    
+
     return (
       <div className="App">
         <span>Here's a list of items!</span>
