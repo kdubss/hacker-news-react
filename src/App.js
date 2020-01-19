@@ -67,21 +67,19 @@ class App extends React.Component {
   };
 };
 
-class Search extends React.Component {
-	render() {
-		const { value, onChange, children } = this.props;
-		
-		return (
-			<form>
-        { children }
-				<input
-					type="text"
-					value={ value }
-					onChange={ onChange }
-				/>
-			</form>		
-		);
-	};
+const Search = props => {
+  const { value, onChange, children } = props;
+
+  return (
+    <form>
+      { children }
+      <input
+        type="text"
+        value={ value }
+        onChange={ onChange }
+      />
+    </form>
+  );
 };
 
 class Table extends React.Component {
@@ -116,7 +114,7 @@ class Table extends React.Component {
 
 class Button extends React.Component {
   render() {
-    const { onClick, className, children } = this.props;
+    const { onClick, className = '', children } = this.props;
 
     return (
       <button
