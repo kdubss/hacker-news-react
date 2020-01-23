@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Button component tests. Button component has a valid snapshot:  1`] = `
-<button
-  type="button"
->
-  Show Next
-</button>
-`;
