@@ -82,46 +82,34 @@ const Search = props => {
   );
 };
 
-const Table = props => {
-  const { list, pattern, onDismiss } = props;
-  console.log(list);
+const Table = ({ list, pattern, onDismiss }) =>
+  <div>
+    {
+      list.filter(isSearched(pattern)).map(item =>
+        <div key={ item.objectID }>
+          <span>
+            <a href={ item.url }>{ item.url }</a>
+          </span>
+          <span>{ item.author }</span>
+          <span>{ item.num_comments }</span>
+          <span>{ item.points }</span>
+          <Button
+            onClick={ () => onDismiss(item.objectID) }
+          >
+            Dismiss
+          </Button>
+        </div>
+      )
+    }
+  </div>
 
-  return (
-    <div>
-      {
-        list.filter(isSearched(pattern)).map(item =>
-          <div key={ item.objectID }>
-            <span>
-              <a href={ item.url }>{ item.url }</a>
-            </span>
-            <span>{ item.author }</span>
-            <span>{ item.num_comments }</span>
-            <span>{ item.points }</span>
-            <span>
-              <Button
-                onClick={ () => onDismiss(item.objectID) }
-              >
-                Dismiss
-              </Button>
-            </span>
-          </div>
-        )
-      }
-    </div>
-  );
-};
-
-const Button = props => {
-  const { onClick, className = '', children } = props;
-  return (
-    <button
+const Button = ({ onClick, className = '', children }) =>
+  <button
     type="button" 
     onClick={ onClick }
     className={ className }
   >
     { children }
   </button>
-  )
-}
 
 export default App;
