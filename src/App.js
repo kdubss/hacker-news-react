@@ -82,50 +82,46 @@ const Search = props => {
   );
 };
 
-class Table extends React.Component {
-	render() {
-    const { list, pattern, onDismiss } = this.props;
+const Table = props => {
+  const { list, pattern, onDismiss } = props;
+  console.log(list);
 
-		return (
-      <div>
-        {
-          list.filter(isSearched(pattern)).map(item =>
-            <div key={ item.objectID }>
-              <span>
-                <a href={ item.url }>{ item.url }</a>
-              </span>
-              <span>{ item.author }</span>
-              <span>{ item.num_comments }</span>
-              <span>{ item.points }</span>
-              <span>
-                <Button
-                  onClick={ () => onDismiss(item.objectID) }
-                >
-                  Dismiss
-                </Button>
-              </span>
-            </div>
-          )
-        }
-      </div>
-		);
-	};
+  return (
+    <div>
+      {
+        list.filter(isSearched(pattern)).map(item =>
+          <div key={ item.objectID }>
+            <span>
+              <a href={ item.url }>{ item.url }</a>
+            </span>
+            <span>{ item.author }</span>
+            <span>{ item.num_comments }</span>
+            <span>{ item.points }</span>
+            <span>
+              <Button
+                onClick={ () => onDismiss(item.objectID) }
+              >
+                Dismiss
+              </Button>
+            </span>
+          </div>
+        )
+      }
+    </div>
+  );
 };
 
-class Button extends React.Component {
-  render() {
-    const { onClick, className = '', children } = this.props;
-
-    return (
-      <button
-        className={ className }
-        type="button"
-        onClick={ onClick }
-      >
-        { children }
-      </button>
-    )
-  }
+const Button = props => {
+  const { onClick, className = '', children } = props;
+  return (
+    <button
+    type="button" 
+    onClick={ onClick }
+    className={ className }
+  >
+    { children }
+  </button>
+  )
 }
 
 export default App;
