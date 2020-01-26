@@ -43,8 +43,11 @@ class App extends React.Component {
    * @param {number} id 
    */
   onDismiss(id) {
-    const newList = this.state.list.filter(item => item.objectID !== id);
-    this.setState({ list: newList });
+    const { result } = this.state;
+    const updatedHits = result.hits.filter(item => item.objectID !== id);
+    this.setState({ 
+      result: { ...this.state.result, hits: updatedHits }
+    });
   };
 
   render() {
