@@ -53,8 +53,6 @@ class App extends React.Component {
   render() {
     const { searchTerm, result } = this.state;
 
-    if (!result) { return null }
-
     return (
       <div className="page">
         <div className="interactions">
@@ -65,11 +63,15 @@ class App extends React.Component {
             Search
           </Search>
         </div>
-				<Table
-					list={ result.hits }
-					pattern={ searchTerm }
-					onDismiss={ this.onDismiss }
-				/>
+        {
+          result
+            ? <Table
+                list={ result.hits }
+                pattern={ searchTerm }
+                onDismiss={ this.onDismiss }
+              />
+            : <h2>Data is being fetched!  Hang on to your hats!</h2>
+        }
       </div>
     );
   };
