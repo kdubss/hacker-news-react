@@ -23,7 +23,12 @@ class App extends React.Component {
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
+    this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
   };
+
+  needsToSearchTopStories(searchTerm) {
+    return !this.state.results[searchTerm];
+  }
 
   setSearchTopStories(result) {
     const { hits, page } = result;
@@ -45,7 +50,11 @@ class App extends React.Component {
     const { searchTerm } = this.state; 
 
     this.setState({ searchKey: searchTerm });
-    this.fetchSearchTopStories(searchTerm);
+
+    if (this.needsToSearchTopStories(searchTerm)) {
+      this.fetchSearchTopStories(searchTerm);
+    };
+    
     event.preventDefault();
   }
 
